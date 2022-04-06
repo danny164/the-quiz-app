@@ -1,9 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent, FooterComponent } from '@app/shared/components';
+import { NgModule } from '@angular/core';
+import {
+  FooterComponent,
+  HeaderComponent,
+  OptionsComponent,
+} from '@app/shared/components';
 import { SanitizedHtmlPipe } from '@app/shared/pipes';
 
-const COMPONENTS = [HeaderComponent, FooterComponent];
+const COMPONENTS = [HeaderComponent, FooterComponent, OptionsComponent];
 
 const DEVEXTREME_MODULES = [];
 

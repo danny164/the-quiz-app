@@ -1,0 +1,15 @@
+.result {
+  padding: 1.5rem;
+}
+
+.result__detail {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.result__overview {
+  margin-top: 1rem;
+}

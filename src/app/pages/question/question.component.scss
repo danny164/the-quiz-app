@@ -1,11 +1,33 @@
-.card {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
+.question {
+  margin-top: 5rem;
 }
 
-ol > li {
-  cursor: pointer;
+.question__header {
+  display: flex;
+  justify-content: space-between;
 
-  margin: 10px 0;
+  padding: 1rem;
+}
+
+.question__logo > img {
+  width: 30px;
+  height: 24px;
+}
+
+.question__tracking {
+  display: flex;
+  justify-content: space-around;
+
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+.question__content {
+  padding: 1.5rem;
+}
+
+.question__footer {
+  text-align: center;
+
+  padding: 1rem;
 }

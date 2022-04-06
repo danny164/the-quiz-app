@@ -1,15 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, Sanitizer } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgDompurifyModule } from '@tinkoff/ng-dompurify';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { QuestionComponent } from './pages/question/question.component';
 import { SharedModule } from './shared/shared.module';
-import { NgDompurifyModule, NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import { ResultComponent } from './pages/question/result/result.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, QuestionComponent],
+  declarations: [AppComponent, HomeComponent, QuestionComponent, ResultComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -17,12 +18,7 @@ import { NgDompurifyModule, NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
     SharedModule,
     NgDompurifyModule,
   ],
-  providers: [
-    {
-      provide: Sanitizer,
-      useClass: NgDompurifySanitizer,
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

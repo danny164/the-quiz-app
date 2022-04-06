@@ -1,78 +1,86 @@
-<div class="container mt-5">
-  <div class="card">
-    <div class="d-flex justify-content-between p-4">
-      <div class="logo">
-        <img
-          src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg"
-          alt=""
-          width="30"
-          height="24"
-        />
+<section class="question">
+  <div class="container">
+    <div class="card">
+      <div class="question__header">
+        <div class="question__logo">
+          <img
+            src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg"
+            alt="logo"
+          />
+        </div>
+
+        <div class="question__welcome">
+          <span>Welcome {{ name }}</span>
+        </div>
       </div>
 
-      <div class="welcome">
-        <span>Welcome {{ name }}</span>
-      </div>
-    </div>
-
-    <div class="d-flex justify-content-around pt-3 py-1">
-      <div class="score">
-        <h6>10 Points</h6>
-      </div>
-      <div class="question-remain">
-        <span>Question 1 of 10</span>
-      </div>
-      <div class="timer">
-        <h6>30 secs ⏱</h6>
-      </div>
-    </div>
-
-    <div class="progress">
-      <div
-        class="progress-bar progress-bar-striped progress-bar-animated"
-        role="progressbar"
-        aria-valuenow="75"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        style="width: 75%"
-      ></div>
-    </div>
-
-    <div class="p-4">
-      <ng-container *ngFor="let question of questions">
-        <div class="question mt-2">
-          <div class="card">
-            <h4 [innerHTML]="unwrap(question.question | dompurify)"></h4>
+      <ng-container
+        *ngIf="currentIndexQuestion < questionList.length - 1; else theResult"
+      >
+        <div class="question__tracking">
+          <div class="score">
+            <h6>Total: {{ points }}</h6>
+          </div>
+          <div class="question-remain">
+            <span
+              >Question {{ currentIndexQuestion + 1 }} of
+              {{ questionList.length || 10 }}</span
+            >
+          </div>
+          <div class="timer">
+            <h6>{{ counter }} secs ⏱</h6>
           </div>
         </div>
 
-        <div class="options">
-          <ol>
-            <li class="card">
-              <span [innerHTML]="question.correct_answer"></span>
-            </li>
+        <div class="progress">
+          <div
+            [ngClass]="{
+              'bg-success': progress === '100',
+              'bg-primary': progress < '100'
+            }"
+            class="progress-bar"
+            role="progressbar"
+            [ngStyle]="{ width: progress + '%' }"
+          ></div>
+        </div>
 
-            <li
-              class="card"
-              *ngFor="let question_inc of question.incorrect_answers"
-            >
-              <span [innerHtml]="question_inc"></span>
-            </li>
-          </ol>
+        <div
+          class="question__content"
+          *ngIf="questionList && questionList.length > 0"
+        >
+          <div class="question__heading">
+            <div class="card">
+              <h4
+                [innerHTML]="
+                  questionList[currentIndexQuestion]?.question | dompurify
+                "
+              ></h4>
+            </div>
+          </div>
+
+          <div class="question__options">
+            <app-options
+              [answers]="questionList[currentIndexQuestion].answers"
+              (selectAnswer)="selectAnswer($event)"
+            ></app-options>
+          </div>
         </div>
       </ng-container>
 
-      <div class="d-flex justify-content-between">
-        <span type="btn" class="btn text-primary">
-          <i class="fas fa-chevron-left fa-2x"></i>
-        </span>
-        <span type="btn" class="btn text-primary">
-          <i class="fas fa-sync-alt fa-2x"></i>
-        </span>
-        <span type="btn" class="btn text-primary">
-          <i class="fas fa-chevron-right fa-2x"></i>
-        </span>
+      <ng-template #theResult>
+        <app-result
+          [points]="points"
+          [correctAnswer]="correctAnswer"
+          [inCorrectAnswer]="inCorrectAnswer"
+          [totalQuestions]="questionList.length"
+        ></app-result>
+      </ng-template>
+
+      <div class="question__footer">
+        <button (click)="resetQuiz()" type="btn" class="btn btn-primary">
+          Reset Quiz
+        </button>
       </div>
     </div>
   </div>
-</div>
+</section>

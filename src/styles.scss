@@ -33,3 +33,15 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.card {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+ol > li {
+  cursor: pointer;
+
+  margin: 10px 0;
+}

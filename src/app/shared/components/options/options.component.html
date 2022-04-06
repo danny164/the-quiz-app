@@ -1,0 +1,6 @@
+<div
+  class="card"
+  (click)="chooseAnswer($event, ans, index)"
+  *ngFor="let ans of answers; let index = index"
+  [innerHTML]="ans.answer"
+></div>
